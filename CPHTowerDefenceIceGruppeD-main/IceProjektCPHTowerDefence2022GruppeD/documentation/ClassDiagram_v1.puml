@@ -1,0 +1,149 @@
+@startuml
+!pragma layout smetana
+'https://plantuml.com/class-diagram
+
+Object User
+Object Login
+User .. Game
+
+'RELATIONSHIP BETWEEN CLASSES'
+Login -- User
+FileIO -- Game
+GUI -- GameMap
+DatabaseIO -- Game
+DatabasePassword -- DatabaseIO
+Main -- Game
+Game -- GameMap
+Game -- Player
+GameMap -- Enemy
+GameMap -- Tower
+TowerUpgrade -- Tower
+Tower -- ATower
+ATower -- basicTower
+ATower -- rookieTower
+ATower -- superTower
+Enemy -- AEnemy
+AEnemy -- basicEnemy
+AEnemy -- epicEnemy
+AEnemy -- legendaryEnemy
+
+'FIELDS AND METHODS'
+Class Main {
++ Game game = new Game;
++ static main(String[] args)
+'method to run program'
++ void runGame();
+}
+
+Class Game {
++ Player player = new Player;
++ GameMap gameMap = new GameMap;
++ void runGame();
++ insertPlayerInfo();
+- void gameDescription();
+- void userMenu();
+- void pauseGame();
+- void loadGame();
+- void startGame();
+- void endGame();
+}
+
+Class GameMap {
++ loadMapGUI();
++ canPlaceTower();
++ displayGrid();
+}
+
+Class GUI {
+Jframe
+Jpanel
++ loadMapGUI();
+}
+
+Class Player {
+- String name;
+- int currentScore
+- int endScore;
+- int health;
+- int startBalance;
+- int currentBalance;
+- int updatedBalance;
++ getName();
++ getCurrentScore();
++ getEndScore();
++ getStartBalance();
++ getCurrentBalance();
++ getUpdatedBalance();
++ getHealth();
++ setHealth();
++ setName();
++ setScore();
++ setEndScore();
++ setStartBalance();
++ setCurrentBalance();
++ setUpdatedBalance();
++ @Override String ToString();
+}
+
+Class DatabasePassword {
++ createConnection();
++ closeConnection();
+}
+
+Class DatabaseIO {
++ insertDataToDB();
++ readDataFromDB();
+}
+
+Class FileIO {
+~ throws IO Exception // try,catch
++ ArrayList<String> data
++ Scanner scan = new scanner : System.in
++ void readFromFile();
+}
+
+Interface Tower {
++ towerPosition();
++ ifEnemyNearby();
++ shootEnemy();
++ setDmg();
+}
+
+Abstract Class ATower {
+- int damage;
+- int radius;
+}
+
+Class basicTower {
+}
+
+Class rookieTower {
+}
+
+Class superTower {
+}
+
+Interface Enemy {
++ moveEnemy();
++ showEnemy();
++ deathOfEnemy();
+}
+
+Abstract Class AEnemy {
+- int health;
+- int value;
+}
+
+Class basicEnemy {
+}
+
+Class epicEnemy {
+}
+
+Class legendaryEnemy {
+}
+
+
+
+
+@enduml
