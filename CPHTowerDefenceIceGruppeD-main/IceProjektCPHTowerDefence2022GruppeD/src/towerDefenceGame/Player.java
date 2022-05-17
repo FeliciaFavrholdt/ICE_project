@@ -2,19 +2,34 @@ package towerDefenceGame;
 
 public class Player {
     private String name;
-    private int currentHealth;
-    private int maxHealth;
+    private int score=0;
+    private int coins;
 
-    public Player (int health){
-        this.maxHealth = health;
-        this.currentHealth = health;
+    public Player(String name){
+        this.name = name;
     }
 
-    public void takeDamage(int damage){
-        System.out.println("you took damage!");
-        this.currentHealth = this.currentHealth-damage;
-        if(this.currentHealth <= 0){
-            System.out.println("game over!");
-        }
+    public String getName() {
+        return name;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getCoins() {
+        return coins;
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
+    }
+
+    public void addCoin(int coinsPerWave) {
+        coins += coinsPerWave;
     }
 }

@@ -3,9 +3,11 @@ package towerDefenceGame.towers;
 import towerDefenceGame.enemies.Enemy;
 
 public interface Tower {
-
-    public void towerPosition();
-    public void ifEnemyNearby();
-    public void shootEnemy(Enemy e);
-    public void setDmg(int damage);
+    void towerPosition();
+    boolean ifOutOfAmmo();
+    void shootEnemy(Enemy e);
+    void setDmg(int damage);
+    int getDmg();
+    void reload();
+    int getCost();
 }
