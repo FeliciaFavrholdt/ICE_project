@@ -89,17 +89,17 @@ public class DatabaseIO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        chooseAPlayer(new Player(dbName));
+        userInputOnID();
         closeConnection();
     }
 
     //method to ...
-    public void chooseAPlayer(Player player) {
+    public void userInputOnID() {
         createConnection();
         String choosePlayer = "SELECT name from PlayerData WHERE id like ?";
 
         try {
-            System.out.println("\nChoose a Player on Id");
+            System.out.println("\nChoose a player by entering player id");
             PreparedStatement query = connection.prepareStatement(choosePlayer);
             int id = scan.nextInt();
             query.setInt(1, id);

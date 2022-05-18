@@ -32,10 +32,7 @@ public class GameSetup {
     //method to choose which kind of game to start
     public void startGame() {
         System.out.println("\n#### GAME STARTED ####");
-        databaseIO.searchForPlayerFromDB();
-        for (int i = 0; i < players.size(); i++) {
-            System.out.println(players.get(i));
-        }
+        addPlayerToGame();
         gameChoice();
     }
 
@@ -50,6 +47,13 @@ public class GameSetup {
         } else if(input.equalsIgnoreCase("n")) {
             game = new TextBasedGame(players.get(0));
         }
+    }
+
+    //method to choose which player should play the game
+    public void addPlayerToGame() {
+        databaseIO.showAllPlayersFromDB();
+        System.out.println("Who is playing?");
+        databaseIO.userInputOnID();
     }
 
     //method to end the game -- shutdown program
@@ -95,7 +99,7 @@ public class GameSetup {
         System.out.println(arrow + " 2) to end the game");
         System.out.println(arrow + " 3) to add a new player");
         System.out.println(arrow + " 4) to delete a player");
-        System.out.println(arrow + " 5) to choose a player to play the game");
+        System.out.println(arrow + " 5) to search for a player");
         System.out.println(arrow + " 6) to show leaderboard");
 
         while (!quit) {
