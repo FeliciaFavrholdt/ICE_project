@@ -99,15 +99,15 @@ public class DatabaseIO {
         String choosePlayer = "SELECT name from PlayerData WHERE id like ?";
 
         try {
-            System.out.println("\nChoose a player by entering player id");
+            System.out.println("Choose a player by entering player id");
             PreparedStatement query = connection.prepareStatement(choosePlayer);
             int id = scan.nextInt();
             query.setInt(1, id);
             ResultSet rs = query.executeQuery();
 
             while (rs.next()) {
+                System.out.println(rs.getString("name"));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

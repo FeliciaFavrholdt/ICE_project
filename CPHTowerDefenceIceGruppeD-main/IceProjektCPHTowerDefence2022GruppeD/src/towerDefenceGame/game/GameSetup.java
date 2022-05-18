@@ -37,7 +37,7 @@ public class GameSetup {
     }
 
     private void gameChoice() {
-        System.out.println("Do you want graphics?");
+        System.out.println("\nDo you want graphics?");
         System.out.println(arrow + " Y) for yes");
         System.out.println(arrow + " N) for no");
 
@@ -52,7 +52,7 @@ public class GameSetup {
     //method to choose which player should play the game
     public void addPlayerToGame() {
         databaseIO.showAllPlayersFromDB();
-        System.out.println("Who is playing?");
+        System.out.println("\nWho is playing?");
         databaseIO.userInputOnID();
     }
 
