@@ -2,25 +2,20 @@ package towerDefenceGame.io;
 
 import towerDefenceGame.enemies.BasicEnemy;
 import towerDefenceGame.enemies.Enemy;
-import towerDefenceGame.enemies.epicEnemy;
-import towerDefenceGame.enemies.legendaryEnemy;
-
+import towerDefenceGame.enemies.EpicEnemy;
+import towerDefenceGame.enemies.LegendaryEnemy;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 public class FileIO {
-
-
-
-
 
     public ArrayList<ArrayList<Enemy>> readWaveData() {
 
         ArrayList<ArrayList<Enemy>> waves =new ArrayList<>();
-        File file = new File("C:\\Users\\jcall\\Documents\\GitHub\\ICE_project\\CPHTowerDefenceIceGruppeD-main\\IceProjektCPHTowerDefence2022GruppeD\\src\\waveData.txt");
+        //File file = new File("C:\\Users\\jcall\\Documents\\GitHub\\ICE_project\\CPHTowerDefenceIceGruppeD-main\\IceProjektCPHTowerDefence2022GruppeD\\src\\waveData.txt");
+        File file = new File("/Users/fillefilejs_m1/Desktop/Github/ICE_project/CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/resources/waveData.txt");
         ArrayList<String> waveData = new ArrayList<>();
 
         try {
@@ -44,12 +39,12 @@ public class FileIO {
                         enemies.add(basicEnemy);
                         break;
                     case 2:
-                        Enemy epicEnemy = new epicEnemy(200);
+                        Enemy epicEnemy = new EpicEnemy(200);
                         enemies.add(epicEnemy);
 
                         break;
                     case 3:
-                        Enemy legendaryEnemy = new legendaryEnemy(400);
+                        Enemy legendaryEnemy = new LegendaryEnemy(400);
                         enemies.add(legendaryEnemy);
 
                         break;
@@ -65,7 +60,4 @@ public class FileIO {
         }
         return waves;
     }
-
-
-
 }

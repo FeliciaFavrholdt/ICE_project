@@ -1,7 +1,7 @@
 package towerDefenceGame.towers;
 
-public class superTower extends Atower {
-    public superTower(){
+public class SuperTower extends ATower {
+    public SuperTower(){
         this.damage = 400;
         this.cost = 400;
     }

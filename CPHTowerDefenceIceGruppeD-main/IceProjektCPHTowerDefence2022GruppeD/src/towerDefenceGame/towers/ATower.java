@@ -2,10 +2,10 @@ package towerDefenceGame.towers;
 
 import towerDefenceGame.enemies.Enemy;
 
-public abstract class Atower implements Tower {
+public abstract class ATower implements Tower {
     protected int damage;
     protected int cost;
-    private int maxAmmuntion=20;
+    private int maxAmmuntion = 20;
     private int ammunition;
 
     @Override

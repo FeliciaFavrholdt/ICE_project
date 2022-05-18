@@ -2,108 +2,122 @@ package towerDefenceGame.game;
 
 import towerDefenceGame.Player;
 import towerDefenceGame.gui.GameScreen;
-
+import towerDefenceGame.io.DatabaseIO;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameSetup {
-    GameMenu gameMenu;
     GameScreen gameScreen;
     GameType game;
     Scanner scan = new Scanner(System.in);
     ArrayList<Player> players;
+    String arrow = "\u2192";
+    DatabaseIO databaseIO;
 
-    //CONSTRUCTOR
+    //constructor
     public GameSetup() {
-        gameMenu = new GameMenu();
         gameScreen = new GameScreen();
         players = new ArrayList<>();
         Player player = new Player("AbeMand22");
         players.add(player);
+        databaseIO = new DatabaseIO(player);
     }
 
     //method to run the game description and user menu
     public void runGame() {
-        gameMenu.gameDescription();
-        gameMenu.userMenu();
+        gameDescription();
+        userMenu();
     }
 
+    //method to choose which kind of game to start
     public void startGame() {
-        System.out.println("you have started the game");
-        System.out.println("Do you want graphics? /y");
+        System.out.println("\n#### GAME STARTED ####");
+        databaseIO.searchForPlayerFromDB();
+        for (int i = 0; i < players.size(); i++) {
+            System.out.println(players.get(i));
+        }
+        gameChoice();
+    }
+
+    private void gameChoice() {
+        System.out.println("Do you want graphics?");
+        System.out.println(arrow + " Y) for yes");
+        System.out.println(arrow + " N) for no");
+
         String input = scan.nextLine();
-        if(input.equalsIgnoreCase("y")){
+        if(input.equalsIgnoreCase("y")) {
             game = new UIBasedGame();
-        }else {
+        } else if(input.equalsIgnoreCase("n")) {
             game = new TextBasedGame(players.get(0));
         }
-        //gameScreen.makeGameScreen();
     }
 
     //method to end the game -- shutdown program
     public void endGame() {
-        System.out.println("you have ended the game");
+        System.out.println("GAME ENDED!");
     }
-    public void gameDescription() {
+
+    //method to display description of the project/game
+    private void gameDescription() {
         String bullet = "\u2022 ";
 
-        //about
+        //titel & about
         System.out.println("""
-                \n>> Welcome to CPH Tower Defense game <<
+                \n>> CPH TOWER DEFENSE MINIGAME <<
                 A minigame made by Helena, Isak, Jamie & Felicia.
                 CPH Business - DAT 1. sem - ICE PROJECT
-
                 """);
 
         //game description
         System.out.println("""
-                 DESCRIPTION 
-                Tower Defence is a game where you build some towers to protect your kingdom against enemies.\s
-                When playing the game the player needs to use these towers to defend different waves of enemies from reaching the end of the path.\s
-                The more enemies you shoot the more money you receive. The money can be used to build more towers.\s""");
+                DESCRIPTION
+                Tower Defence is a game where you build some towers to protect your kingdom against enemies.
+                When playing the game the player needs to use these towers to defend different waves of enemies from reaching the end of the path.
+                The more enemies you shoot the more money you receive. The money can be used to build more towers.
+                """);
 
         //game rules
-        System.out.println("\n RULES " +
+        System.out.println("RULES " +
                 "\n" + bullet + "Make towers to defend your kingdom" +
                 "\n" + bullet + "Play waves to earn money to buy more towers" +
-                "\n" + bullet + "You have 5/5 lives - you will lose a life when ...." +
-                "\n" + bullet + "Have fun!");
+                "\n" + bullet + "Have fun!\n");
     }
+
+    //method to display a user menu with calls to other methods
     public void userMenu() {
         Scanner scan = new Scanner(System.in);
-        GameSetup gameSetup = new GameSetup();
         boolean quit = false;
         int menu;
 
-        System.out.println("\n MENU ");
-        System.out.println(  " Press 0 to quit the menu");
-        System.out.println(  " Press 1 to start the game");
-        System.out.println(  " Press 2 to end the game");
-        System.out.println(  " Press 3 to insert a new player");
-        System.out.println(  " Press 4 to delete a player");
-        System.out.println( " Press 5 to search for all added players");
-        System.out.println( " Press 6 to show leaderboard");
+        System.out.println("MENU ");
+        System.out.println(arrow + " 0) to quit the menu");
+        System.out.println(arrow + " 1) to start the game");
+        System.out.println(arrow + " 2) to end the game");
+        System.out.println(arrow + " 3) to add a new player");
+        System.out.println(arrow + " 4) to delete a player");
+        System.out.println(arrow + " 5) to choose a player to play the game");
+        System.out.println(arrow + " 6) to show leaderboard");
 
         while (!quit) {
             menu = scan.nextInt();
             switch (menu) {
                 case 1:
-                    gameSetup.startGame();
+                    startGame();
                     break;
                 case 2:
-                    gameSetup.endGame();
+                    endGame();
                     break;
                 case 3:
-                    //registerPlayer();
+                    databaseIO.registerPlayerToDB();
                     break;
                 case 4:
-                    //databaseIO.ShowAllPlayersAndDeleteFromDB();
+                    databaseIO.ShowAllPlayersAndDeleteFromDB();
                     break;
                 case 5:
-                    //databaseIO.searchForPlayerFromDB();
+                    databaseIO.searchForPlayerFromDB();
                     break;
                 case 6:
-                    //databaseIO.showLeaderBoard();
+                    databaseIO.showLeaderBoard();
                     break;
                 case 0:
                     quit = true;
