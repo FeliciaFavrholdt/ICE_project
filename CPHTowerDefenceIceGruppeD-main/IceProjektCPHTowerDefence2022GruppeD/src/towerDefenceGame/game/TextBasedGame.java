@@ -39,7 +39,7 @@ public class TextBasedGame implements GameType {
 
     //method to
     private void menuSelect() {
-        System.out.println("Current amount of towers: " + towers.size());
+        System.out.println("\nCurrent amount of towers: " + towers.size());
         System.out.println("Current amount of coins: " + player.getCoins());
 
         System.out.println(

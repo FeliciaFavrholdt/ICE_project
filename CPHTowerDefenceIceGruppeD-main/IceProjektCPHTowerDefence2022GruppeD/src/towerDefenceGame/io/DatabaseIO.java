@@ -82,8 +82,6 @@ public class DatabaseIO {
             while (rs.next()) {
                 dbName = rs.getString("name");
                 id = rs.getString("id");
-
-                System.out.println("ID: " + id + " Name: " + dbName);
             }
             query.close();
         } catch (SQLException e) {
