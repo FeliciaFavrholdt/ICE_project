@@ -2,20 +2,25 @@ package towerDefenceGame.towers;
 
 import towerDefenceGame.enemies.Enemy;
 
+import java.util.ArrayList;
+
 public abstract class ATower implements Tower {
     protected int damage;
     protected int cost;
-    private int maxAmmuntion = 20;
+    private int maxAmmunition = 20;
     private int ammunition;
+
+    //constructor
+    public ATower() {
+    }
 
     @Override
     public void towerPosition() {
-
     }
 
     @Override
     public boolean ifOutOfAmmo() {
-        if(ammunition <=0){
+        if(ammunition <= 0){
             return true;
         }
         return false;
@@ -37,10 +42,11 @@ public abstract class ATower implements Tower {
     public int getDmg() {
         return damage;
     }
+
     @Override
-    public void reload(){
-        ammunition = maxAmmuntion;
-        System.out.println("im reloading");
+    public void reload() {
+        ammunition = maxAmmunition;
+        System.out.println(this.toString() + " is reloading");
     }
 
     public int getCost() {

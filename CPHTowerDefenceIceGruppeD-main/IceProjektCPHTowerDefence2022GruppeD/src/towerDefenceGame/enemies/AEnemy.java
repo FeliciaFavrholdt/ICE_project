@@ -37,6 +37,7 @@ public abstract class AEnemy implements Enemy {
     public void enemyTakeDamage(int damageNumber){
         this.health = this.health - damageNumber;
     }
+
     public int getEnemyHealth(){
         return this.health;
     }

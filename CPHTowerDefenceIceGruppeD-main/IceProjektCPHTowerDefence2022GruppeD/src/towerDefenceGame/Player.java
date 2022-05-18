@@ -1,12 +1,12 @@
 package towerDefenceGame;
 
 public class Player {
-    private String name;
+    String name;
     private int score=0;
     private int coins;
 
     //constructor
-    public Player(String name){
+    public Player(String name) {
         this.name = name;
     }
 
@@ -15,7 +15,6 @@ public class Player {
         coins += coinsPerWave;
     }
 
-    //getters
     public String getName() {
         return name;
     }

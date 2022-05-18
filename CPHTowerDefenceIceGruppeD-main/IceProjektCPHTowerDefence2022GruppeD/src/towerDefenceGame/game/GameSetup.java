@@ -9,18 +9,20 @@ import java.util.Scanner;
 public class GameSetup {
     GameScreen gameScreen;
     GameType game;
-    Scanner scan = new Scanner(System.in);
+    Scanner scan;
     ArrayList<Player> players;
     String arrow = "\u2192";
     DatabaseIO databaseIO;
+    String input;
 
     //constructor
     public GameSetup() {
         gameScreen = new GameScreen();
         players = new ArrayList<>();
-        Player player = new Player("AbeMand22");
+        Player player = new Player("name");
         players.add(player);
         databaseIO = new DatabaseIO(player);
+        scan = new Scanner(System.in);
     }
 
     //method to run the game description and user menu
@@ -41,7 +43,7 @@ public class GameSetup {
         System.out.println(arrow + " Y) for yes");
         System.out.println(arrow + " N) for no");
 
-        String input = scan.nextLine();
+        input = scan.nextLine();
         if(input.equalsIgnoreCase("y")) {
             game = new UIBasedGame();
         } else if(input.equalsIgnoreCase("n")) {
@@ -89,11 +91,10 @@ public class GameSetup {
 
     //method to display a user menu with calls to other methods
     public void userMenu() {
-        Scanner scan = new Scanner(System.in);
         boolean quit = false;
-        int menu;
+        String menu;
 
-        System.out.println("MENU ");
+        System.out.println("\nMENU ");
         System.out.println(arrow + " 0) to quit the menu");
         System.out.println(arrow + " 1) to start the game");
         System.out.println(arrow + " 2) to end the game");
@@ -103,27 +104,31 @@ public class GameSetup {
         System.out.println(arrow + " 6) to show leaderboard");
 
         while (!quit) {
-            menu = scan.nextInt();
+            menu = scan.nextLine();
             switch (menu) {
-                case 1:
+                case "1":
                     startGame();
                     break;
-                case 2:
+                case "2":
                     endGame();
                     break;
-                case 3:
+                case "3":
                     databaseIO.registerPlayerToDB();
+                    userMenu();
                     break;
-                case 4:
-                    databaseIO.ShowAllPlayersAndDeleteFromDB();
+                case "4":
+                    databaseIO.deleteFromDB();
+                    userMenu();
                     break;
-                case 5:
+                case "5":
                     databaseIO.searchForPlayerFromDB();
+                    userMenu();
                     break;
-                case 6:
+                case "6":
                     databaseIO.showLeaderBoard();
+                    userMenu();
                     break;
-                case 0:
+                case "0":
                     quit = true;
                     break;
                 default:

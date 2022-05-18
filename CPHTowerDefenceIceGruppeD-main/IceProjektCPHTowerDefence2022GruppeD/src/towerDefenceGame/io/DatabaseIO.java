@@ -1,6 +1,7 @@
 package towerDefenceGame.io;
 
 import towerDefenceGame.Player;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -11,8 +12,8 @@ public class DatabaseIO {
     Connection connection;
     String s;
     String arrow = "\u2192";
-    String id;
-    String dbName;
+    Player tmpPlayer;
+    int id;
 
     //constructor
     public DatabaseIO(Player player) {
@@ -48,17 +49,10 @@ public class DatabaseIO {
 
         try {
             PreparedStatement query = connection.prepareStatement(insertNameInto);
-            for (int i = 0; i < 100; i++) {
-                System.out.println("Add a player name or press Q to return to the menu");
-                s = scan.nextLine();
-
-                if (s.equalsIgnoreCase("q")) {
-                    System.out.println("need method here to go back to menu");
-                    break;
-                }
-                query.setString(1, s);
-                query.executeUpdate();
-            }
+            System.out.println("Add a player name:");
+            s = scan.nextLine();
+            query.setString(1, s);
+            query.executeUpdate();
             query.close();
         } catch (SQLException e) {
             System.out.println(error);
@@ -80,35 +74,35 @@ public class DatabaseIO {
             ResultSet rs = query.executeQuery();
 
             while (rs.next()) {
-                dbName = rs.getString("name");
-                id = rs.getString("id");
+                System.out.println("ID: " + rs.getString("id") + " Name: " + rs.getString("name"));
             }
             query.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        userInputOnID();
         closeConnection();
     }
 
-    //method to ...
-    public void userInputOnID() {
+    //method to choose a player id
+    public Player userInputOnID() {
         createConnection();
         String choosePlayer = "SELECT name from PlayerData WHERE id like ?";
 
         try {
             System.out.println("Choose a player by entering player id");
             PreparedStatement query = connection.prepareStatement(choosePlayer);
-            int id = scan.nextInt();
+            id = scan.nextInt();
             query.setInt(1, id);
             ResultSet rs = query.executeQuery();
 
             while (rs.next()) {
-                System.out.println(rs.getString("name"));
+                System.out.println("You have chosen the player: " + rs.getString("Name"));
+                tmpPlayer = new Player(rs.getString("name"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return tmpPlayer;
     }
 
     //method to show all registered players from the SQL database
@@ -132,11 +126,10 @@ public class DatabaseIO {
     }
 
     //method to run the show all players and delete player methods
-    public void ShowAllPlayersAndDeleteFromDB() {
+    public void deleteFromDB() {
         String choices = "\n" +
                 arrow + " Press P to delete a player\n" +
-                arrow + " Press D to delete all data\n" +
-                arrow + " Press Q to return to the menu";
+                arrow + " Press D to delete all data";
 
         createConnection();
         System.out.println("\n>> Registered Players <<");
@@ -149,10 +142,8 @@ public class DatabaseIO {
             deletePlayerFromDB();
         } else if (userInput.equalsIgnoreCase("D")) {
             deleteAllDataFromDB();
-        } else if (userInput.equalsIgnoreCase("Q")) {
-            System.out.println("put method here to return to the menu");
         }
-        scan.close();
+        closeConnection();
     }
 
     //method to delete a player from the SQL database
@@ -166,18 +157,18 @@ public class DatabaseIO {
             s = scan.nextLine();
             query.setString(1, s);
             query.executeUpdate();
-            query.close();
             System.out.println("You have deleted a player");
-
+            query.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        closeConnection();
     }
 
     //method to show all players and scores from the SQL database
     public void showLeaderBoard() {
         System.out.println(">> LEADERBOARD <<");
-        leaderBoardByScoreDesc();
+        sortLeaderBoardDesc();
     }
 
     //method to delete all data from the SQL database
@@ -220,7 +211,7 @@ public class DatabaseIO {
     }
 
     //method to sort score in descending order
-    public void leaderBoardByScoreDesc() {
+    public void sortLeaderBoardDesc() {
         createConnection();
         String sortScoreDesc = "SELECT * FROM PlayerData ORDER BY scorepoints DESC";
 
@@ -236,4 +227,5 @@ public class DatabaseIO {
             e.printStackTrace();
         }
     }
+
 }

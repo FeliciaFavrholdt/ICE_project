@@ -5,4 +5,10 @@ public class SuperTower extends ATower {
         this.damage = 400;
         this.cost = 400;
     }
+
+    @Override
+    public String toString() {
+        return "Super Tower";
+    }
+
 }

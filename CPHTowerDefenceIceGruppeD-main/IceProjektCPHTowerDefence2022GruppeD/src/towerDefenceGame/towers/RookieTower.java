@@ -5,4 +5,9 @@ public class RookieTower extends ATower {
         this.damage = 200;
         this.cost = 200;
     }
+
+    @Override
+    public String toString() {
+        return "Rookie Tower";
+    }
 }

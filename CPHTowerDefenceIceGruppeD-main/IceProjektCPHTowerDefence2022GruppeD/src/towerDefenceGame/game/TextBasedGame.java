@@ -67,11 +67,12 @@ public class TextBasedGame implements GameType {
         for (int i = 0; i < towers.size(); i++) {
             while (!towers.get(i).ifOutOfAmmo()) {
                 towers.get(i).shootEnemy(waves.get(currentWave).get(0));
-                System.out.println(waves.get(currentWave).get(0).getEnemyHealth());
+                //System.out.println(waves.get(currentWave).get(0).getEnemyHealth()); //shows enemy health
                 if (waves.get(currentWave).size() == 1 && waves.get(currentWave).get(0).getEnemyHealth() <= 0) { //hvis der ikke er nogen enemies tilbage så
                     currentWave++;
-                    System.out.println("You have completed the wave: " + currentWave);
+                    System.out.println("You have completed wave: " + currentWave);
                     player.addCoin(coinsPerWave);
+                    System.out.println("You got " + coinsPerWave + " coins.");
                     return;
                 }
                 if (waves.get(currentWave).get(0).getEnemyHealth() <= 0) {
@@ -91,6 +92,7 @@ public class TextBasedGame implements GameType {
 
     //method to
     private void buyTower() {
+        //strings
         String text = "You do not have the coin to buy this tower\n";
 
         System.out.println("""
