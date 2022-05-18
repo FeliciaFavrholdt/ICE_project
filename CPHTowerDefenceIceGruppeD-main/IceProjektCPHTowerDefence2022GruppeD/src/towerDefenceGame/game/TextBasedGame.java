@@ -33,8 +33,7 @@ public class TextBasedGame implements GameType {
             menuSelect();
         }
         player.setScore(currentWave * 69420);
-        System.out.println("#### GAME OVER! ####\n" +
-                player.getName() + " your score is: " + player.getScore());
+        System.out.println(player.getName() + " your score is: " + player.getScore());
     }
 
     //method to
@@ -53,9 +52,16 @@ public class TextBasedGame implements GameType {
                 buyTower();
                 break;
             case "b":
-                doWave();
+                if (waves.size()!=currentWave){
+                    doWave();
+                }else{
+                    System.out.println("CONGRATZ MY DUDE! You won the game :D Good job!!!!");
+                    hasLost = true;
+                }
+
                 break;
             case "c":
+                System.out.println("#### GAME OVER! ####\n");
                 hasLost = true;
                 break;
         }
@@ -67,7 +73,7 @@ public class TextBasedGame implements GameType {
         for (int i = 0; i < towers.size(); i++) {
             while (!towers.get(i).ifOutOfAmmo()) {
                 towers.get(i).shootEnemy(waves.get(currentWave).get(0));
-                //System.out.println(waves.get(currentWave).get(0).getEnemyHealth()); //shows enemy health
+                System.out.println(waves.get(currentWave).get(0).getEnemyHealth()); //shows enemy health
                 if (waves.get(currentWave).size() == 1 && waves.get(currentWave).get(0).getEnemyHealth() <= 0) { //hvis der ikke er nogen enemies tilbage så
                     currentWave++;
                     System.out.println("You have completed wave: " + currentWave);
@@ -142,32 +148,3 @@ public class TextBasedGame implements GameType {
     }
 }
 
-//WE DO NOT USE THIS ??
-      /* public void doWave(){
-        int totalWaveHP = getTotalEnemyHP();
-        int totalTowerDamage = getTotalTowerDamage();
-        if(totalTowerDamage >= totalWaveHP){
-            System.out.println("you won the wave!");
-            currentWave++;
-        }else{
-            System.out.println("game over!");
-            hasLost = true;
-        }
-    }*/
-
-   /* private int getTotalTowerDamage() {
-        int sum = 0;
-        for (Tower t:towers) {
-           sum += t.getDmg();
-        }
-        return sum;
-    }*/
-
-
-   /* private int getTotalEnemyHP() {
-        int sum=0;
-        for(int i =0;i<waves.get(currentWave).size();i++){
-            sum += waves.get(currentWave).get(i).getEnemyHealth();
-        }
-        return sum;
-    }*/

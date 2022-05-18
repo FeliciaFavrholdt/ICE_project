@@ -1,13 +1,15 @@
 package towerDefenceGame;
 
 public class Player {
-    String name;
+    private String name;
     private int score=0;
     private int coins;
+    private int id;
 
     //constructor
-    public Player(String name) {
+    public Player(String name, int id) {
         this.name = name;
+        this.id = id;
     }
 
     //method to ...
@@ -25,6 +27,10 @@ public class Player {
 
     public int getCoins() {
         return coins;
+    }
+
+    public int getId(){
+        return id;
     }
 
     //setters

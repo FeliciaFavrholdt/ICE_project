@@ -16,7 +16,7 @@ public class DatabaseIO {
     int id;
 
     //constructor
-    public DatabaseIO(Player player) {
+    public DatabaseIO() {
         this.scan = new Scanner(System.in);
         this.input = scan.nextLine();
     }
@@ -97,7 +97,7 @@ public class DatabaseIO {
 
             while (rs.next()) {
                 System.out.println("You have chosen the player: " + rs.getString("Name"));
-                tmpPlayer = new Player(rs.getString("name"));
+                tmpPlayer = new Player(rs.getString("name"),id);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -188,25 +188,42 @@ public class DatabaseIO {
             e.printStackTrace();
         }
     }
+    public int getCurrentDBScore(Player player){
+        int dbScore = 0;
+        String currentScore = "SELECT scorepoints FROM PlayerData WHERE id = ?";
+
+        try {
+            PreparedStatement query = connection.prepareStatement(currentScore);
+            query.setInt(1,player.getId());
+            ResultSet rs = query.executeQuery();
+            while (rs.next()){
+                dbScore = rs.getInt("scorepoints");
+            }
+            query.close();
+        } catch (SQLException w){
+            w.printStackTrace();
+        }
+        return dbScore;
+    }
 
     //method to update scorepoints to a player(on ID)
-    private void updateScorePoint() {
+    public void updateScorePoint(Player player) {
         createConnection();
         String updateScorePoints = "UPDATE PlayerData SET scorepoints = ? WHERE id = ?";
 
-        try {
-            PreparedStatement query = connection.prepareStatement(updateScorePoints);
-            System.out.println(arrow + " Enter Score:");
-            String id = scan.nextLine();
-            query.setString(1, id);
-            System.out.println(arrow + " Assign to player ID:");
-            String score = scan.nextLine();
-            query.setString(2, score);
-            query.executeUpdate();
-            query.close();
-            System.out.println("You have updated a score to player!");
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (player.getScore() > getCurrentDBScore(player)) {
+            try {
+                PreparedStatement query = connection.prepareStatement(updateScorePoints);
+                query.setInt(1, player.getScore());
+                query.setInt(2, player.getId());
+                query.executeUpdate();
+                query.close();
+                System.out.println("You have updated a score to player!");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Your new score was not higher than your last.");
         }
     }
 

@@ -14,14 +14,13 @@ public class GameSetup {
     String arrow = "\u2192";
     DatabaseIO databaseIO;
     String input;
+    private Player player;
 
     //constructor
     public GameSetup() {
         gameScreen = new GameScreen();
-        players = new ArrayList<>();
-        Player player = new Player("name");
-        players.add(player);
-        databaseIO = new DatabaseIO(player);
+        //players = new ArrayList<>();
+        databaseIO = new DatabaseIO();
         scan = new Scanner(System.in);
     }
 
@@ -34,7 +33,7 @@ public class GameSetup {
     //method to choose which kind of game to start
     public void startGame() {
         System.out.println("\n#### GAME STARTED ####");
-        addPlayerToGame();
+        player = addPlayerToGame();
         gameChoice();
     }
 
@@ -47,15 +46,17 @@ public class GameSetup {
         if(input.equalsIgnoreCase("y")) {
             game = new UIBasedGame();
         } else if(input.equalsIgnoreCase("n")) {
-            game = new TextBasedGame(players.get(0));
+            game = new TextBasedGame(player);
+            databaseIO.updateScorePoint(player);
         }
+        userMenu();
     }
 
     //method to choose which player should play the game
-    public void addPlayerToGame() {
+    public Player addPlayerToGame() {
         databaseIO.showAllPlayersFromDB();
         System.out.println("\nWho is playing?");
-        databaseIO.userInputOnID();
+        return databaseIO.userInputOnID();
     }
 
     //method to end the game -- shutdown program

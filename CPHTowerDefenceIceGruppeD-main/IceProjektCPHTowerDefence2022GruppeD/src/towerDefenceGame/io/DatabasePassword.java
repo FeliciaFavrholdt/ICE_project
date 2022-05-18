@@ -8,7 +8,8 @@ public class DatabasePassword {
     public DatabasePassword() {
         this.JdbcUrl = "jdbc:mysql://127.0.0.1:3306/Ice?" + "autoReconnect=true&useSSL=false";
         this.username = "root";
-        this.password = "LangeBananer74";
+        //this.password = "LangeBananer74";
+        this.password = "Lampen04aug";
     }
 
     public String getJdbcUrl() {
