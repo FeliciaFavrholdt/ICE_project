@@ -17,7 +17,7 @@ public class DatabaseIO {
     // CONSTRUCTOR
     public DatabaseIO() {
         this.scan = new Scanner(System.in);
-        this.input = scan.nextLine();
+        //this.input = scan.nextLine();
     }
 
     // Method to create a connection to the SQL workbench

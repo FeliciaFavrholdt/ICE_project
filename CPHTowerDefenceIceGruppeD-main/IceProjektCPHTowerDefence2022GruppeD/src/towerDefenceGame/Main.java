@@ -2,6 +2,7 @@ package towerDefenceGame;
 
 import towerDefenceGame.game.GameSetup;
 import towerDefenceGame.game.TextBasedGame;
+import towerDefenceGame.gui.Map;
 
 public class Main {
 
@@ -11,7 +12,6 @@ public class Main {
 
         //method to run the game
         gameSetup.runGame();
-
 
     }
 }

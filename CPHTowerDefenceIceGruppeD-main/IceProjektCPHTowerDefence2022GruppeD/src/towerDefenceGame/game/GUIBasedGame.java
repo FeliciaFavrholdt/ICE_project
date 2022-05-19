@@ -2,16 +2,17 @@ package towerDefenceGame.game;
 
 import towerDefenceGame.Player;
 import towerDefenceGame.enemies.Enemy;
+import towerDefenceGame.gui.Map;
 import towerDefenceGame.io.FileIO;
-import towerDefenceGame.towers.Tower;
 import towerDefenceGame.towers.BasicTower;
 import towerDefenceGame.towers.RookieTower;
 import towerDefenceGame.towers.SuperTower;
+import towerDefenceGame.towers.Tower;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class TextBasedGame implements GameType {
+public class GUIBasedGame implements GameType{
     Scanner scan = new Scanner(System.in);
     ArrayList<Tower> towers;
     ArrayList<ArrayList<Enemy>> waves;
@@ -21,28 +22,39 @@ public class TextBasedGame implements GameType {
     private int startingCoins = 200;
     private int coinsPerWave = 100;
     private Player player;
+    private int nextTowerPosX=1;
+    private int nextTowerPosY=5;
+    private int nextEnemyPosX=2;
+    private int nextEnemyPosY=2;
     String arrow = "\u2192";
+    Map gameScreen;
 
-    // CONSTRUCTOR
-    public TextBasedGame(Player player) {
+    public GUIBasedGame(Player player){
+        gameScreen  = new Map();
         this.player = player;
         player.setCoins(startingCoins);
         towers = new ArrayList<>();
         waves = fileIO.readWaveData();
-        while (hasLost != true) {
+        while (hasLost != true && waves.size()!=currentWave) {
+            for(int i=0;i<waves.get(currentWave).size();i++){
+                placeEnemy(waves.get(currentWave).get(i));
+            }
             menuSelect();
+        }
+        if(waves.size()==currentWave){
+            System.out.println("CONGRATZ MY DUDE! You won the game :D Good job!!!!");
         }
         player.setScore(currentWave * 69420);
         System.out.println(player.getName() + " your score is: " + player.getScore());
     }
 
-    // Menu select method which shows a menu to buy towers, play a wave or end game
     public void menuSelect() {
+
         System.out.println("\nCurrent amount of towers: " + towers.size());
         System.out.println("Current amount of coins: " + player.getCoins());
 
         System.out.println(
-                        arrow + " A) to buy a new tower" + "\n" +
+                arrow + " A) to buy a new tower" + "\n" +
                         arrow + " B) to play next wave" + "\n" +
                         arrow + " C) to end game");
 
@@ -52,13 +64,7 @@ public class TextBasedGame implements GameType {
                 buyTower();
                 break;
             case "b":
-                if (waves.size()!=currentWave){
                     doWave();
-                }else{
-                    System.out.println("CONGRATZ MY DUDE! You won the game :D Good job!!!!");
-                    hasLost = true;
-                }
-
                 break;
             case "c":
                 System.out.println("#### GAME OVER! ####\n");
@@ -67,7 +73,7 @@ public class TextBasedGame implements GameType {
         }
     }
 
-    // Method to run a wave - loops through all 15 waves
+
     public void doWave() {
         reloadAllTowers();
         for (int i = 0; i < towers.size(); i++) {
@@ -87,18 +93,17 @@ public class TextBasedGame implements GameType {
             }
         }
         hasLost = true;
+        System.out.println("#### GAME OVER! ####\n");
     }
 
-    // Method to reload all the towers the player has bought
     public void reloadAllTowers() {
         for (Tower t : towers) {
             t.reload();
         }
     }
 
-    // Method to buy towers - shows how many money you have and what the towers costs
     public void buyTower() {
-        //strings
+//strings
         String text = "You do not have the coins to buy this tower\n";
 
         System.out.println("""
@@ -120,6 +125,7 @@ public class TextBasedGame implements GameType {
                 if (player.getCoins() >= tmpTower.getCost()) {
                     towers.add(tmpTower);
                     player.addCoin(-tmpTower.getCost());
+                    placeTower(tmpTower);
                 } else {
                     System.out.println(text);
                 }
@@ -130,6 +136,7 @@ public class TextBasedGame implements GameType {
                 if (player.getCoins() >= tmpTower.getCost()) {
                     towers.add(tmpTower);
                     player.addCoin(-tmpTower.getCost());
+                    placeTower(tmpTower);
                 } else {
                     System.out.println(text);
                 }
@@ -140,11 +147,51 @@ public class TextBasedGame implements GameType {
                 if (player.getCoins() >= tmpTower.getCost()) {
                     towers.add(tmpTower);
                     player.addCoin(-tmpTower.getCost());
+                    placeTower(tmpTower);
                 } else {
                     System.out.println(text);
                 }
                 break;
         }
     }
-}
 
+    public void placeTower(Tower t){
+        gameScreen.addIconToPanel(t.getIcon(),nextTowerPosX,nextTowerPosY);
+        if(nextTowerPosX  == 11){
+            nextTowerPosX = 0;
+            nextTowerPosY++;
+        }else if(nextTowerPosX == 10){
+            nextTowerPosX =1;
+            nextTowerPosY++;
+        }else{
+            nextTowerPosX+=2;
+        }
+    }
+
+    public void placeEnemy(Enemy e){
+        gameScreen.removeIconFromPanel(nextEnemyPosX,nextEnemyPosY);
+        gameScreen.addIconToPanel(e.getIcon(),nextEnemyPosX,nextEnemyPosY);
+        if(nextEnemyPosY == 2){
+            if(nextEnemyPosX==9){
+                nextEnemyPosY--;
+                nextEnemyPosX = 0;
+            }else {
+                nextEnemyPosX++;
+            }
+        }else if (nextEnemyPosY==1){
+            if(nextEnemyPosX==10){
+                nextEnemyPosY--;
+                nextEnemyPosX=1;
+            }else {
+                nextEnemyPosX+=2;
+            }
+        }else if (nextEnemyPosY==0){
+            if(nextEnemyPosX==11){
+                nextEnemyPosY=2;
+                nextEnemyPosX=2;
+            }else {
+                nextEnemyPosX+=2;
+            }
+        }
+    }
+}

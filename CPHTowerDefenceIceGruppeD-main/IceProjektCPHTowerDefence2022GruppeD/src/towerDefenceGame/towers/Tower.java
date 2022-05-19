@@ -2,6 +2,7 @@ package towerDefenceGame.towers;
 
 import towerDefenceGame.enemies.Enemy;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public interface Tower {
@@ -12,4 +13,5 @@ public interface Tower {
     int getDmg();
     void reload();
     int getCost();
+    ImageIcon getIcon();
 }

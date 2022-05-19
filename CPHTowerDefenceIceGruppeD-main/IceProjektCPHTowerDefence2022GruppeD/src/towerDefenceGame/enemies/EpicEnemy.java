@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public class EpicEnemy extends AEnemy {
 
-    private ImageIcon icon;
+    ImageIcon icon = new ImageIcon("CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/src/res/EnemyTwo.png");
 
     // CONSTRUCTOR
     public EpicEnemy(int health) {

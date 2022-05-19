@@ -2,22 +2,27 @@ package towerDefenceGame.gui;
 
 import towerDefenceGame.enemies.BasicEnemy;
 import towerDefenceGame.enemies.Enemy;
+import towerDefenceGame.enemies.EpicEnemy;
+import towerDefenceGame.enemies.LegendaryEnemy;
+import towerDefenceGame.towers.BasicTower;
+import towerDefenceGame.towers.Tower;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class Map {
-    Enemy test = new BasicEnemy(1);
-    int width = 12;
-    int height = 8;
-    JFrame frame;
-    JPanel panels[][];
+    private int width = 12;
+    private int height = 8;
+    private JFrame frame;
+    private JPanel panels[][];
+    private JPanel bgPanel;
+
     public Map() {
         makeFrame();
+        makeBG();
         panels = new JPanel[width][height]; // double array
         makePanels();
         addPanelToFrame();
-        addIconToPanel(test,4,6);
         frame.setVisible(true);
     }
 
@@ -33,7 +38,6 @@ public class Map {
             for(int j=0;j<height;j++){
                 JPanel panel = new JPanel();
                 panel.setBounds(i*90,j*90,90,90);
-                panel.setBackground(Color.CYAN);
                 panels[i][j] = panel;
             }
         }
@@ -47,10 +51,24 @@ public class Map {
         }
     }
 
-    public void addIconToPanel(Enemy enemy,int posX, int posY){
-        ImageIcon icon = enemy.getIcon();
+    public void addIconToPanel(ImageIcon icon,int posX, int posY){
         JLabel label = new JLabel(icon);
         panels[posX][posY].add(label);
+        frame.setVisible(true);
+    }
+
+    public void removeIconFromPanel(int PosX,int PosY){
+        panels[PosX][PosY].removeAll();
+        frame.setVisible(true);
+    }
+
+    private void makeBG(){
+        bgPanel = new JPanel();
+        ImageIcon icon = new ImageIcon("CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/src/res/BAGGRUND.png");
+        JLabel label = new JLabel(icon);
+        bgPanel.setBounds(0,0,1080,720);
+        bgPanel.add(label);
+        frame.add(bgPanel);
     }
 
 }

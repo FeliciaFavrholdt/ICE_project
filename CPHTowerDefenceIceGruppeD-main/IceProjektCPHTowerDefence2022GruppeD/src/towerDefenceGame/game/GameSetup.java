@@ -42,12 +42,12 @@ public class GameSetup {
 
         input = scan.nextLine();
         if(input.equalsIgnoreCase("y")) {
-            game = new UIBasedGame();
+            game = new GUIBasedGame(player);
+            databaseIO.updateScorePoint(player);
         } else if(input.equalsIgnoreCase("n")) {
             game = new TextBasedGame(player);
             databaseIO.updateScorePoint(player);
         }
-        userMenu();
     }
 
     // Method to choose which player should play the game
@@ -57,10 +57,6 @@ public class GameSetup {
         return databaseIO.userInputOnID();
     }
 
-    // Method to end the game -- shutdown program
-    public void endGame() {
-        System.out.println("GAME ENDED!");
-    }
 
     // Method to display description of the project/game
     private void gameDescription() {
@@ -92,49 +88,45 @@ public class GameSetup {
     public void userMenu() {
         boolean quit = false;
         String menu;
-
-        System.out.println("\nMENU ");
-        System.out.println(arrow + " 0) to quit the menu");
-        System.out.println(arrow + " 1) to start the game");
-        System.out.println(arrow + " 2) to end the game");
-        System.out.println(arrow + " 3) to add a new player");
-        System.out.println(arrow + " 4) to delete a player");
-        System.out.println(arrow + " 5) to search for a player");
-        System.out.println(arrow + " 6) to show leaderboard");
-
+        displayMenu();
         while (!quit) {
+            System.out.println(arrow + " Enter) to get the menu");
             menu = scan.nextLine();
             switch (menu) {
                 case "1":
                     startGame();
                     break;
                 case "2":
-                    endGame();
+                    databaseIO.registerPlayerToDB();
                     break;
                 case "3":
-                    databaseIO.registerPlayerToDB();
-                    userMenu();
+                    databaseIO.deleteFromDB();
                     break;
                 case "4":
-                    databaseIO.deleteFromDB();
-                    userMenu();
+                    databaseIO.searchForPlayerFromDB();
                     break;
                 case "5":
-                    databaseIO.searchForPlayerFromDB();
-                    userMenu();
-                    break;
-                case "6":
                     databaseIO.showLeaderBoard();
-                    userMenu();
                     break;
                 case "0":
                     quit = true;
                     break;
                 default:
                     System.out.println("Invalid choice.. choose again");
-                    userMenu();
+                    displayMenu();
             }
         }
         System.out.println("You quit the menu!");
+    }
+
+    public void displayMenu(){
+        System.out.println("\nMENU ");
+        System.out.println(arrow + " 0) to quit the main menu");
+        System.out.println(arrow + " 1) to start the game");
+        System.out.println(arrow + " 2) to add a new player");
+        System.out.println(arrow + " 3) to delete a player");
+        System.out.println(arrow + " 4) to search for a player");
+        System.out.println(arrow + " 5) to show leaderboard");
+
     }
 }

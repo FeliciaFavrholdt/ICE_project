@@ -1,6 +1,9 @@
 package towerDefenceGame.towers;
 
+import javax.swing.*;
+
 public class BasicTower extends ATower {
+    ImageIcon icon = new ImageIcon("CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/src/res/TowerJesper.png");
 
     // CONSTRUCTOR
     public BasicTower() {
@@ -12,6 +15,9 @@ public class BasicTower extends ATower {
     @Override
     public String toString() {
         return "Basic Tower";
+    }
+    public ImageIcon getIcon() {
+        return icon;
     }
 
 }
