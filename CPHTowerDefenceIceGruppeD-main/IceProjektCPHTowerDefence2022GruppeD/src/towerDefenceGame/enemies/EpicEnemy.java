@@ -1,9 +1,9 @@
 package towerDefenceGame.enemies;
 
-public class BasicEnemy extends AEnemy{
+public class EpicEnemy extends AEnemy {
 
     // CONSTRUCTOR
-    public BasicEnemy(int health) {
+    public EpicEnemy(int health) {
         super(health);
     }
 }

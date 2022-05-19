@@ -4,32 +4,49 @@ public class Player {
     private String name;
     private int score=0;
     private int coins;
+    private int id;
 
-    public Player(String name){
+    // CONSTRUCTOR
+    public Player(String name, int id) {
         this.name = name;
+        this.id = id;
     }
 
+    // Method to add coins per wave
+    public void addCoin(int coinsPerWave) {
+        coins += coinsPerWave;
+    }
+
+    // GETTERS
+    // Getter to get the name of the player
     public String getName() {
         return name;
     }
 
+    // Getter to get the score
     public int getScore() {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
-
+    // Getter to get the coins
     public int getCoins() {
         return coins;
     }
 
+    // Getter to get the id
+    public int getId(){
+        return id;
+    }
+
+    // SETTERS
+    // Setter to set the score
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    // Setter to set the coins
     public void setCoins(int coins) {
         this.coins = coins;
     }
 
-    public void addCoin(int coinsPerWave) {
-        coins += coinsPerWave;
-    }
 }

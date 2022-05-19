@@ -1,0 +1,188 @@
+@startuml
+!pragma layout smetana
+'https://plantuml.com/class-diagram
+
+'RELATIONSHIP BETWEEN CLASSES'
+
+'FIELDS AND METHODS'
+Class Main {
++ static void main(String[] args)
+}
+
+Interface GameType {
+}
+
+Class TextBasedGame {
++ TextBasedGame()
+- void buyTower()
++ void doWave()
+- void menuSelect()
++ void reloadAllTowers()
+String arrow
+- void coinsPerWave()
+- void currentWave()
+FileIO : fileIO
+- void hasLost()
+- void player()
+Scanner scan
+- void startingCoins()
+ArrayList<Tower> towers
+ArrayList<ArrayList<Enemy>> waves
+}
+
+Class UIBasedGame {
++ UIBasedGame()
+}
+
+Class GameSetup {
++ GameSetup()
++ Player addPlayerToGame()
++ void endGame()
+- void gameChoice()
+- void gameDescription()
++ void runGame()
++ void startGame()
++ void userMenu()
+String arrow
+DatabaseIO : databaseIO
+GameType : game
+String input
+- Player : player
+ArrayList<Player> players
+Scanner scan
+}
+
+Class Player {
++ Player(String, int)
++ void addCoin(int)
++ int getCoins()
++ int getId()
++ String getName()
++ int getScore()
++ void setCoins()
++ void setScore()
+- int coins
+- int id
+- String name
+- int score
+}
+
+Class DatabasePassword {
++ DatabasePassword()
++ String getJdbcUrl()
++ String getPassword()
++ String getUsername()
+- String JdbcUrl
+- String password
+- String username
+}
+
+Class DatabaseIO {
++ DatabaseIO
+- void closeConnection()
+- void createConnection()
+- void deleteAllDataFromDB()
++ void deleteFromDB()
++ void deletePlayerFromDB()
++ int getCurrentDBScore(Player)
++ void registerPlayerToDB()
++ void searchForPlayerFromDB()
++ void showAllPlayersFromDB()
++ void showLeaderBoard()
++ void sortLeaderBoardDesc()
++ void updateScorePoint()
++ Player userInputOnID()
+String arrow
+Connection : connection
+DatabasePassword : databasePassword
+int id
+String input
+String s
+Scanner : scan
+Player tmpPlayer
+}
+
+Class FileIO {
+~ throws IO Exception // try,catch
++ ArrayList<ArrayList<Enemy>> readWaveData()
+
+}
+
+Interface Tower {
++ int getCost()
++ int getDmg()
++ boolean ifOutOfAmmo()
++ void reload
++ void setDmg()
++ void shootEnemy()
++ void towerPosition()
+}
+
+Abstract Class ATower {
++ int ATower()
++ int getCost()
++ int getDmg()
++ boolean ifOutOfAmmo()
++ void reload()
++ void setDmg(int)
++ void shootEnemy(Enemy)
++ void towerPosition()
+- int ammunition
+# int cost
+# int damage
+- int maxAmmunition
+}
+
+Class BasicTower {
++ BasicTower()
++ String toString()
+}
+
+Class RookieTower {
++ RookieTower()
++ String toString()
+}
+
+Class SuperTower {
++ SuperTower()
++ String toString()
+}
+
+Interface Enemy {
++ int checkIfEnemyIsInBase(int, int)
++ void deathOfEnemy()
++ void enemyTakeDamage(int)
++ void getEnemyHealth(int)
++ void moveEnemy(int, int)
++ void showEnemy()
+
+}
+
+Abstract Class AEnemy {
++ int AEnemy
++ int checkIfEnemyIsInBase(int, int)
++ void deathOfEnemy()
++ void enemyTakeDamage(int)
++ int getEnemyHealth()
++ int moveEnemy(int, int)
++ void showEnemy()
+- int health
+- int value
+- int x
+- int y
+
+}
+
+Class BasicEnemy {
++ BasicEnemy(int)
+}
+
+Class EpicEnemy {
++ EpicEnemy(int)
+}
+
+Class LegendaryEnemy {
++ LegendaryEnemy(int)
+}
+
+@enduml
