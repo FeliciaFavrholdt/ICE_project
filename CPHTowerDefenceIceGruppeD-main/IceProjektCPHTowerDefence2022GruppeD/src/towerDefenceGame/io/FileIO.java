@@ -15,8 +15,8 @@ public class FileIO {
 
         ArrayList<ArrayList<Enemy>> waves =new ArrayList<>();
         //File file = new File("C:\\Users\\jcall\\Documents\\GitHub\\ICE_project\\CPHTowerDefenceIceGruppeD-main\\IceProjektCPHTowerDefence2022GruppeD\\src\\waveData.txt");
-        //File file = new File("/Users/fillefilejs_m1/Desktop/Github/ICE_project/CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/resources/waveData.txt");
-        File file = new File("C:\\Users\\Helen\\OneDrive\\Dokumenter\\GitHub\\ICE_project\\CPHTowerDefenceIceGruppeD-main\\IceProjektCPHTowerDefence2022GruppeD\\resources\\waveData.txt");
+        File file = new File("/Users/fillefilejs_m1/Desktop/Github/ICE_project/CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/resources/waveData.txt");
+        //File file = new File("C:\\Users\\Helen\\OneDrive\\Dokumenter\\GitHub\\ICE_project\\CPHTowerDefenceIceGruppeD-main\\IceProjektCPHTowerDefence2022GruppeD\\resources\\waveData.txt");
         ArrayList<String> waveData = new ArrayList<>();
 
         try {

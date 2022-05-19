@@ -1,13 +1,11 @@
 package towerDefenceGame.game;
 
 import towerDefenceGame.Player;
-import towerDefenceGame.gui.GameScreen;
 import towerDefenceGame.io.DatabaseIO;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameSetup {
-    GameScreen gameScreen;
     GameType game;
     Scanner scan;
     ArrayList<Player> players;
@@ -18,7 +16,6 @@ public class GameSetup {
 
     //constructor
     public GameSetup() {
-        gameScreen = new GameScreen();
         //players = new ArrayList<>();
         databaseIO = new DatabaseIO();
         scan = new Scanner(System.in);

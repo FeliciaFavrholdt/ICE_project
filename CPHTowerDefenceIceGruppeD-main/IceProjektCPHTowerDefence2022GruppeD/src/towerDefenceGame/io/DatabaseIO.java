@@ -1,7 +1,6 @@
 package towerDefenceGame.io;
 
 import towerDefenceGame.Player;
-
 import java.sql.*;
 import java.util.Scanner;
 
