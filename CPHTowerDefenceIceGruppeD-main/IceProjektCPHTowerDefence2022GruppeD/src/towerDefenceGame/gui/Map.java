@@ -1,9 +1,13 @@
 package towerDefenceGame.gui;
 
+import towerDefenceGame.enemies.BasicEnemy;
+import towerDefenceGame.enemies.Enemy;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class Map {
+    Enemy test = new BasicEnemy(1);
     int width = 12;
     int height = 8;
     JFrame frame;
@@ -13,6 +17,7 @@ public class Map {
         panels = new JPanel[width][height]; // double array
         makePanels();
         addPanelToFrame();
+        addIconToPanel(test,4,6);
         frame.setVisible(true);
     }
 
@@ -40,6 +45,12 @@ public class Map {
                 frame.add(panels[i][j]);
             }
         }
+    }
+
+    public void addIconToPanel(Enemy enemy,int posX, int posY){
+        ImageIcon icon = enemy.getIcon();
+        JLabel label = new JLabel(icon);
+        panels[posX][posY].add(label);
     }
 
 }

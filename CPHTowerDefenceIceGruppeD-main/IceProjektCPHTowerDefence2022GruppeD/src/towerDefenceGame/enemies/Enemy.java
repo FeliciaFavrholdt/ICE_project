@@ -1,5 +1,7 @@
 package towerDefenceGame.enemies;
 
+import javax.swing.*;
+
 public interface Enemy {
 
     public void moveEnemy(int x,int y);
@@ -8,4 +10,5 @@ public interface Enemy {
     public int checkIfEnemyIsInBase(int baseX, int baseY);
     public void enemyTakeDamage(int damageNumber);
     public int getEnemyHealth();
+    public ImageIcon getIcon();
 }
