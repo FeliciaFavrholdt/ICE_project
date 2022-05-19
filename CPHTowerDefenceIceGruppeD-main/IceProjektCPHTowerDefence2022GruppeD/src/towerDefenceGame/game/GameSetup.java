@@ -37,7 +37,6 @@ public class GameSetup {
         }else {
             game = new TextBasedGame(players.get(0));
         }
-        //gameScreen.makeGameScreen();
     }
 
     //method to end the game -- shutdown program

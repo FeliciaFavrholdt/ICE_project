@@ -6,9 +6,16 @@ package towerDefenceGame.gui;
 
 import javax.swing.*; //JFrame, JPanel, JLabel etc.
 import java.awt.*;
+import java.io.BufferedWriter;
+import java.io.Writer;
 
-public class GameScreen extends JFrame {
+public class GameScreen {
     int x, y, w, h;
+    JFrame frame;
+    JPanel terminal;
+    JTextField chatBox;
+    JTextPane writeToUserField;
+
     //private Dimension size;
 
     //CONSTRUCTOR
@@ -21,50 +28,42 @@ public class GameScreen extends JFrame {
 
     //method to make the game screen
     public void makeGameScreen() {
-        //Icons
+        makeJFrame();
+        makeTerminal();
+        frame.add(terminal);
+        writeToUser("hejasdfgfdasafgfdssdf");
+        writeToUser("hej");
+    }
 
-        //Labels
-        JLabel helloLabel = new JLabel();
-        helloLabel.setText("Hello You");
-
-        JLabel byeLabel = new JLabel();
-        byeLabel.setText("Bye Bye!");
-
-        //Tiles
-        JPanel greyPanel = new JPanel();
-        greyPanel.setBackground(Color.darkGray);
-        greyPanel.setBounds(x, y, w, h);
-
-        JPanel pinkPanel = new JPanel();
-        pinkPanel.setBackground(Color.pink);
-        pinkPanel.setBounds(x+100, y, w, h);
-
-        JPanel greenPanel = new JPanel();
-        greenPanel.setBackground(Color.green);
-        greenPanel.setBounds(x+200, y, w, h);
-
-        JPanel redPanel = new JPanel();
-        redPanel.setBackground(Color.red);
-        redPanel.setBounds(x, y+100, w, h);
-
-        //Window
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    private void makeJFrame(){
+        frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
-        frame.setSize(w*10, h*10);
+        frame.setSize(1000, 800);
         frame.setVisible(true);
-
-        //add labels to panels
-        pinkPanel.add(helloLabel);
-        greenPanel.add(byeLabel);
-
-        //add tiles to frame/window
-        frame.add(greyPanel);
-        frame.add(pinkPanel);
-        frame.add(greenPanel);
-        frame.add(redPanel);
+        frame.setResizable(false);
     }
+
+    private void makeTerminal(){
+        terminal = new JPanel();
+        terminal.setBounds((int)(frame.getWidth()*0.8),0,200,frame.getHeight());
+        chatBox = new JTextField("Write Here!");
+        chatBox.setBounds(0,(int)(terminal.getHeight()*0.8),terminal.getWidth()-20,100);
+        writeToUserField = new JTextPane();
+        writeToUserField.setBounds(0,10,terminal.getWidth()-20,(int)(terminal.getHeight()*0.8)-10);
+        writeToUserField.setEditable(true);
+
+        terminal.add(writeToUserField);
+        terminal.add(chatBox);
+    }
+
+    public void writeToUser(String string){
+        String tmp = writeToUserField.getText();
+        tmp = tmp + "\n" + string;
+        writeToUserField.setText(tmp);
+    }
+
 
 
 
