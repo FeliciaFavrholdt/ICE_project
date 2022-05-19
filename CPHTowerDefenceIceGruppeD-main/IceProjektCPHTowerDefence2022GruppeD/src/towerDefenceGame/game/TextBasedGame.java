@@ -23,7 +23,7 @@ public class TextBasedGame implements GameType {
     private Player player;
     String arrow = "\u2192";
 
-    //constructor
+    // CONSTRUCTOR
     public TextBasedGame(Player player) {
         this.player = player;
         player.setCoins(startingCoins);
@@ -36,7 +36,7 @@ public class TextBasedGame implements GameType {
         System.out.println(player.getName() + " your score is: " + player.getScore());
     }
 
-    //method to
+    // Menu select method which shows a menu to buy towers, play a wave or end game
     private void menuSelect() {
         System.out.println("\nCurrent amount of towers: " + towers.size());
         System.out.println("Current amount of coins: " + player.getCoins());
@@ -67,7 +67,7 @@ public class TextBasedGame implements GameType {
         }
     }
 
-    //method to run a wave - loops through all 15 waves
+    // Method to run a wave - loops through all 15 waves
     public void doWave() {
         reloadAllTowers();
         for (int i = 0; i < towers.size(); i++) {
@@ -89,17 +89,17 @@ public class TextBasedGame implements GameType {
         hasLost = true;
     }
 
-    //method to
+    // Method to reload all the towers the player has bought
     public void reloadAllTowers() {
         for (Tower t : towers) {
             t.reload();
         }
     }
 
-    //method to
+    // Method to buy towers - shows how many money you have and what the towers costs
     private void buyTower() {
         //strings
-        String text = "You do not have the coin to buy this tower\n";
+        String text = "You do not have the coins to buy this tower\n";
 
         System.out.println("""
                 Basic Tower = costs 100 coins, gives 100 damage

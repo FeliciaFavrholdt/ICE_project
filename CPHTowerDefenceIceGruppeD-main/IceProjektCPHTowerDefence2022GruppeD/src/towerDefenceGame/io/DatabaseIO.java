@@ -14,13 +14,13 @@ public class DatabaseIO {
     Player tmpPlayer;
     int id;
 
-    //constructor
+    // CONSTRUCTOR
     public DatabaseIO() {
         this.scan = new Scanner(System.in);
         this.input = scan.nextLine();
     }
 
-    //method to create a connection to the SQL workbench
+    // Method to create a connection to the SQL workbench
     private void createConnection() {
         databasePassword = new DatabasePassword();
 
@@ -31,7 +31,7 @@ public class DatabaseIO {
         }
     }
 
-    //method to close a connection to the SQL workbench
+    // Method to close a connection to the SQL workbench
     private void closeConnection() {
         try {
             connection.close();
@@ -40,7 +40,7 @@ public class DatabaseIO {
         }
     }
 
-    //method to register a player into the SQL database
+    // Method to register a player into the SQL database
     public void registerPlayerToDB() {
         createConnection();
         String error = "There is an error.";
@@ -60,7 +60,7 @@ public class DatabaseIO {
         closeConnection();
     }
 
-    //method to search for a player in the SQL database
+    // Method to search for a player in the SQL database
     public void searchForPlayerFromDB() {
         createConnection();
         String selectAllIfName = "SELECT * FROM PlayerData WHERE name like ?";
@@ -82,7 +82,8 @@ public class DatabaseIO {
         closeConnection();
     }
 
-    //method to choose a player id
+    // Method to choose a player id
+    // The method takes the input ( the id ) and connect it to the player name
     public Player userInputOnID() {
         createConnection();
         String choosePlayer = "SELECT name from PlayerData WHERE id like ?";
@@ -104,7 +105,7 @@ public class DatabaseIO {
         return tmpPlayer;
     }
 
-    //method to show all registered players from the SQL database
+    // Method to show all registered players from the SQL database
     public void showAllPlayersFromDB() {
         createConnection();
         String showAllData = "SELECT * FROM PlayerData";
@@ -124,7 +125,7 @@ public class DatabaseIO {
         closeConnection();
     }
 
-    //method to run the show all players and delete player methods
+    // Method to run the show all players and delete player methods
     public void deleteFromDB() {
         String choices = "\n" +
                 arrow + " Press P to delete a player\n" +
@@ -145,7 +146,7 @@ public class DatabaseIO {
         closeConnection();
     }
 
-    //method to delete a player from the SQL database
+    // Method to delete a player from the SQL database
     public void deletePlayerFromDB() {
         createConnection();
         String deletePlayer = "DELETE FROM PlayerData WHERE id = ?";
@@ -164,13 +165,13 @@ public class DatabaseIO {
         closeConnection();
     }
 
-    //method to show all players and scores from the SQL database
+    // Method to show all players and scores from the SQL database
     public void showLeaderBoard() {
         System.out.println(">> LEADERBOARD <<");
         sortLeaderBoardDesc();
     }
 
-    //method to delete all data from the SQL database
+    // Method to delete all data from the SQL database
     private void deleteAllDataFromDB() {
         createConnection();
         String deleteTable = "SELECT * FROM Ice.PlayerData";
@@ -205,7 +206,8 @@ public class DatabaseIO {
         return dbScore;
     }
 
-    //method to update scorepoints to a player(on ID)
+    // Method to update scorepoints to a player(on ID)
+    // It updates if the new score is higher than the one saved
     public void updateScorePoint(Player player) {
         createConnection();
         String updateScorePoints = "UPDATE PlayerData SET scorepoints = ? WHERE id = ?";
@@ -226,7 +228,7 @@ public class DatabaseIO {
         }
     }
 
-    //method to sort score in descending order
+    // Method to sort score in descending order
     public void sortLeaderBoardDesc() {
         createConnection();
         String sortScoreDesc = "SELECT * FROM PlayerData ORDER BY scorepoints DESC";

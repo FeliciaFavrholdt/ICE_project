@@ -14,26 +14,27 @@ public class GameSetup {
     String input;
     private Player player;
 
-    //constructor
+    // CONSTRUCTOR
     public GameSetup() {
         //players = new ArrayList<>();
         databaseIO = new DatabaseIO();
         scan = new Scanner(System.in);
     }
 
-    //method to run the game description and user menu
+    // Method to run the game description and user menu
     public void runGame() {
         gameDescription();
         userMenu();
     }
 
-    //method to choose which kind of game to start
+    // Method to choose which kind of game to start
     public void startGame() {
         System.out.println("\n#### GAME STARTED ####");
         player = addPlayerToGame();
         gameChoice();
     }
 
+    // Method to ask user if they want to play with graphics or just text based
     private void gameChoice() {
         System.out.println("\nDo you want graphics?");
         System.out.println(arrow + " Y) for yes");
@@ -49,19 +50,19 @@ public class GameSetup {
         userMenu();
     }
 
-    //method to choose which player should play the game
+    // Method to choose which player should play the game
     public Player addPlayerToGame() {
         databaseIO.showAllPlayersFromDB();
         System.out.println("\nWho is playing?");
         return databaseIO.userInputOnID();
     }
 
-    //method to end the game -- shutdown program
+    // Method to end the game -- shutdown program
     public void endGame() {
         System.out.println("GAME ENDED!");
     }
 
-    //method to display description of the project/game
+    // Method to display description of the project/game
     private void gameDescription() {
         String bullet = "\u2022 ";
 
@@ -87,7 +88,7 @@ public class GameSetup {
                 "\n" + bullet + "Have fun!\n");
     }
 
-    //method to display a user menu with calls to other methods
+    // Method to display a user menu with calls to other methods
     public void userMenu() {
         boolean quit = false;
         String menu;

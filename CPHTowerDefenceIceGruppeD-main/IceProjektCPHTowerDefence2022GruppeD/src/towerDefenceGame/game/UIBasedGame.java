@@ -4,7 +4,7 @@ import towerDefenceGame.gui.MapBuild;
 
 public class UIBasedGame implements GameType {
 
-    //constructor
+    // CONSTRUCTOR
     public UIBasedGame() {
 
     }
