@@ -3,7 +3,7 @@ package towerDefenceGame.towers;
 import javax.swing.*;
 
 public class BasicTower extends ATower {
-    ImageIcon icon = new ImageIcon("CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/src/res/TowerJesper.png");
+    ImageIcon icon = new ImageIcon("CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/src/res/towerJesper.png");
 
     // CONSTRUCTOR
     public BasicTower() {

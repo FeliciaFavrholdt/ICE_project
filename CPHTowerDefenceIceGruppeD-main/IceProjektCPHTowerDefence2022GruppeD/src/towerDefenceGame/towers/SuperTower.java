@@ -3,7 +3,7 @@ package towerDefenceGame.towers;
 import javax.swing.*;
 
 public class SuperTower extends ATower {
-    ImageIcon icon = new ImageIcon("CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/src/res/TowerTobias.png");
+    ImageIcon icon = new ImageIcon("CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/src/res/towerTobias.png");
 
     // CONSTRUCTOR
     public SuperTower(){

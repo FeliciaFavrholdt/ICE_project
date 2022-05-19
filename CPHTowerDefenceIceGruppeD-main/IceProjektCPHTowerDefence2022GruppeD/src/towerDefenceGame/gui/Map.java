@@ -64,7 +64,7 @@ public class Map {
 
     private void makeBG(){
         bgPanel = new JPanel();
-        ImageIcon icon = new ImageIcon("CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/src/res/BAGGRUND.png");
+        ImageIcon icon = new ImageIcon("CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/src/res/backgroundImage.png");
         JLabel label = new JLabel(icon);
         bgPanel.setBounds(0,0,1080,720);
         bgPanel.add(label);
