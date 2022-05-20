@@ -15,7 +15,8 @@ public class DatabasePassword {
         // passwords to be used on local computers
         //this.password = "LangeBananer74";
         //this.password = "Lampen04aug";
-        this.password = "Mysql1238Code18";
+        //this.password = "Mysql1238Code18";
+        this.password = "Solskin#12";
     }
 
     // Method to return the sql url connection
