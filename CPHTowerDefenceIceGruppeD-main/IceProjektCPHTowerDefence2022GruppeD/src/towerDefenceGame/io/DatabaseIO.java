@@ -26,7 +26,7 @@ public class DatabaseIO {
 
     // Method to create a connection to the SQL workbench
     private void createConnection() {
-        databasePassword = new DatabasePassword();
+        databasePassword = new DatabasePassword(); // creating a new DatabasePassword object
 
         try {
             connection = DriverManager.getConnection(databasePassword.getJdbcUrl(), databasePassword.getUsername(), databasePassword.getPassword());
@@ -39,7 +39,7 @@ public class DatabaseIO {
     private void closeConnection() {
         try {
             connection.close();
-        } catch (SQLException e) {
+        } catch (SQLException e) { // wrapped in a try catch to handle the otherwise thrown SQLException that would prevent us from running our program
             e.printStackTrace();
         }
     }
@@ -68,13 +68,13 @@ public class DatabaseIO {
     // Method to search for a player in the SQL database
     public void searchForPlayerFromDB() {
         createConnection();
-        String selectAllIfName = "SELECT * FROM PlayerData WHERE name like ?";
+        String selectAllIfName = "SELECT * FROM PlayerData WHERE name like ?"; //selects all data from the database table with the name similar to the variable ?
 
         try {
             System.out.println("Search for all added players:");
             PreparedStatement query = connection.prepareStatement(selectAllIfName);
-            s = "%" + scan.nextLine() + "%";
-            query.setString(1, s);
+            s = "%" + scan.nextLine() + "%"; //
+            query.setString(1, s);// the string names 's' here is what the ? variable is referencing
             ResultSet rs = query.executeQuery();
 
             while (rs.next()) {
@@ -90,14 +90,14 @@ public class DatabaseIO {
     // Method to choose a player id - takes the input ( the id ) and connects it to the player name
     public Player userInputOnID() {
         createConnection();
-        String choosePlayer = "SELECT name from PlayerData WHERE id like ?";
+        String choosePlayer = "SELECT name from PlayerData WHERE id like ?";  //this here saves the SQLcode to be executed in the database into a string.
 
         try {
             System.out.println("Choose a player by entering player id");
-            PreparedStatement query = connection.prepareStatement(choosePlayer);
+            PreparedStatement query = connection.prepareStatement(choosePlayer); // establishes a connection to  database and selects the string containing the SQLCode.
             id = scan.nextInt();
             query.setInt(1, id);
-            ResultSet rs = query.executeQuery();
+            ResultSet rs = query.executeQuery();// this here then executes the SQLCODE after the above connection is established.
 
             while (rs.next()) {
                 System.out.println("You have chosen the player: " + rs.getString("Name"));
@@ -112,7 +112,7 @@ public class DatabaseIO {
     // Method to show all registered players from the SQL database
     public void showAllPlayersFromDB() {
         createConnection();
-        String showAllData = "SELECT * FROM PlayerData";
+        String showAllData = "SELECT * FROM PlayerData"; // saves a statement that selects all data from a table named Playerdata into a string for later use.
 
         try {
             PreparedStatement query = connection.prepareStatement(showAllData);
@@ -154,7 +154,7 @@ public class DatabaseIO {
     // Method to delete a player from the SQL database
     public void deletePlayerFromDB() {
         createConnection();
-        String deletePlayer = "DELETE FROM PlayerData WHERE id = ?";
+        String deletePlayer = "DELETE FROM PlayerData WHERE id = ?"; //removes specific data which is similar to variable '?' from database table named playerdata
 
         try {
             PreparedStatement query = connection.prepareStatement(deletePlayer);
