@@ -15,17 +15,17 @@ import java.util.Scanner;
 public class GUIBasedGame implements GameType {
 
     // SCANNER
-    public Scanner scan = new Scanner(System.in);
+    private Scanner scan = new Scanner(System.in);
 
     // OBJECTS OF CLASSES
-    public GameScreen gameScreen;
+    private GameScreen gameScreen;
     private Player player;
-    public FileIO fileIO = new FileIO();
-    public Audio audio = new Audio();
+    private FileIO fileIO = new FileIO();
+    private Audio audio = new Audio();
 
     // ARRAYLISTS
-    public ArrayList<Tower> towers;
-    public ArrayList<ArrayList<Enemy>> waves;
+    private ArrayList<Tower> towers;
+    private ArrayList<ArrayList<Enemy>> waves;
 
     // PRIMITIVE DATA FIELDS
     private boolean hasLost = false;
@@ -38,7 +38,7 @@ public class GUIBasedGame implements GameType {
     private int nextEnemyPosY = 2;
 
     // STRINGS
-    public String arrow = "\u2192";
+    private String arrow = "\u2192";
 
     // CONSTRUCTOR
     public GUIBasedGame(Player player) {
@@ -60,7 +60,7 @@ public class GUIBasedGame implements GameType {
         System.out.println(player.getName() + " your score is: " + player.getScore());
     }
 
-    // Method to
+    //Game Menu Method
     public void menuSelect() {
         System.out.println("\nCurrent amount of towers: " + towers.size());
         System.out.println("Current amount of coins: " + player.getCoins());
@@ -86,7 +86,7 @@ public class GUIBasedGame implements GameType {
         }
     }
 
-    // Method to
+    // Method to run a wave in the game
     public void doWave() {
         reloadAllTowers();
         for (int i = 0; i < towers.size(); i++) {
@@ -111,14 +111,14 @@ public class GUIBasedGame implements GameType {
         System.out.println("#### GAME OVER! ####\n");
     }
 
-    // Method to
+    // Method to reload all towers
     public void reloadAllTowers() {
         for (Tower t : towers) {
             t.reload();
         }
     }
 
-    // Method to
+    // Method to buy a tower
     public void buyTower() {
         //strings
         String text = "You do not have the coins to buy this tower\n";
@@ -175,7 +175,7 @@ public class GUIBasedGame implements GameType {
         }
     }
 
-    // Method to
+    // Method to place a tower in graphics
     public void placeTower(Tower tower) {
         gameScreen.addIconToPanel(tower.getIcon(), nextTowerPosX, nextTowerPosY);
         if (nextTowerPosX == 11) {
@@ -189,7 +189,7 @@ public class GUIBasedGame implements GameType {
         }
     }
 
-    // Method to
+    // Method to place a enemy in graphics
     public void placeEnemy(Enemy enemy) {
         gameScreen.removeIconFromPanel(nextEnemyPosX, nextEnemyPosY);
         gameScreen.addIconToPanel(enemy.getIcon(), nextEnemyPosX, nextEnemyPosY);

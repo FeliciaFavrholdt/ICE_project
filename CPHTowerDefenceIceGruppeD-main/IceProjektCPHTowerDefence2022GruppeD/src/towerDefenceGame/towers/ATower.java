@@ -14,10 +14,6 @@ public abstract class ATower implements Tower {
     public ATower() {
     }
 
-    // Method to
-    @Override
-    public void towerPosition() {
-    }
 
     // Method to see if the tower is out of ammo
     @Override
