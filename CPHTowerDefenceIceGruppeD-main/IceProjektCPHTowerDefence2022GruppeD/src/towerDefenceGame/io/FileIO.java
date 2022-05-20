@@ -15,7 +15,7 @@ public class FileIO {
     public ArrayList<ArrayList<Enemy>> readWaveData() {
 
         // FILES
-        File file = new File("CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/src/res/waveData.txt");
+        File file = new File("CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/src/waveData.txt");
 
         // ARRAYLISTS
         ArrayList<ArrayList<Enemy>> waves = new ArrayList<>();

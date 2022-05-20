@@ -1,0 +1,49 @@
+@startuml
+!pragma layout smetana
+
+Object Main
+Object Game
+Object GameScreen
+Object FileIO
+Object Player
+Object Tower
+Object T1
+Object T2
+Object T3
+Object Enemy
+Object E1
+Object E2
+Object E3
+Object DatabaseIO
+Object DBPassword
+Object Login
+Object TowerUpgrade
+Object GUIBased
+Object TextBased
+
+Main -> Game
+Player --> Game
+Login .. Player
+FileIO .... Game
+DatabaseIO ... Game
+DBPassword <--> DatabaseIO
+
+Game --> GUIBased
+Game --> TextBased
+
+GUIBased *-- GameScreen
+GUIBased *-- Tower
+GUIBased *-- Enemy
+
+TextBased *-- Tower
+TextBased *-- Enemy
+
+TowerUpgrade .. Tower
+Tower o-- T1
+Tower o-- T2
+Tower o-- T3
+
+Enemy o-- E1
+Enemy o-- E2
+Enemy o-- E3
+@enduml

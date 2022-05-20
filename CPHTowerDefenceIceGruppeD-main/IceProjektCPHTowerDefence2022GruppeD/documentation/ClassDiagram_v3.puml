@@ -1,0 +1,259 @@
+@startuml
+!pragma layout smetana
+'https://plantuml.com/class-diagram
+
+'RELATIONSHIP BETWEEN CLASSES'
+Main - GameSetup
+GameSetup *-- GameType
+GameSetup *-- Player
+
+TextBasedGame *-- Tower
+GUIBasedGame *--- Tower
+
+TextBasedGame *-- Enemy
+GUIBasedGame *-- Enemy
+
+DatabaseIO .. DatabasePassword
+
+
+'FIELDS AND METHODS'
+Class Main {
++ static void main(String[] args)
+}
+
+Interface GameType {
++ void menuSelect();
++ void doWave();
++ void reloadAllTowers();
++ void buyTower();
+}
+
+Class TextBasedGame implements GameType {
++ String arrow
+- boolean hasLost
+- int currentWave
+- int startingCoins
+- int coinsPerWave
+
+- Scanner scan : System.in
+- FileIO fileIO
+- Player player
+- ArrayList<Tower> towers
+- ArrayList<ArrayList<Enemy>> waves
+
++ <constructor> TextBasedGame(Player player)
++ void menuSelect();
++ void doWave();
++ void reloadAllTowers();
++ void buyTower();
+}
+
+Class GUIBasedGame implements GameType {
++ String arrow
+- boolean hasLost
+- int currentWave
+- int startingCoins
+- int coinsPerWave
+- int nextTowerPosX
+- int nextTowerPosY
+- int nextEnemyPosX
+- int nextEnemyPosY
+
+- Scanner scan : System.in
+- GameScreen gameScreen
+- FileIO fileIO
+- Audio audio
+- Player player
+- ArrayList<Tower> towers
+- ArrayList<ArrayList<Enemy>> waves
+
++ <constructor> GUIBasedGame(Player player)
++ void menuSelect();
++ void doWave();
++ void reloadAllTowers();
++ void buyTower();
++ void placeTower(Tower tower);
++ void placeEnemy(Enemy enemy);
+}
+
+Class GameSetup {
+- String arrow
+- String input
+
+- GameType game
+- Scanner scan
+- ArrayList<Player> players
+- DatabaseIO databasIO
+- Player player
+
++ <constructor> GameSetup()
++ void runGame();
++ void startGame();
++ Player addPlayerToGame();
++ void userMenu();
++ void displayMenu();
+- void gameChoice();
+- void gameDescription();
+}
+
+Class Player {
+- String name
+- int score
+- int coins
+- int id
+
++ <constructor> Player(String name, int id)
++ void addCoins(int coinsPerWave);
++ <getter> String getName();
++ <getter> int getScore();
++ <getter> int getCoins();
++ <getter> int getId();
++ <setter> void setScore(int score);
++ <setter> void setCoins(int coins);
+}
+
+Class DatabasePassword {
+- final String JdbcUrl
+- final String username
+- final String password
+
++ <constructor> DatabasePassword()
++ <getter> String getJdbcUrl();
++ <getter> String getUsername();
++ <getter> String getPassword();
+}
+
+Class DatabaseIO {
+- String s
+- String arrow
+- int id
+
+- DatabasePassword databasePassword
+- Scanner scan
+- Connection connection
+- Player tmpPlayer
+
++ <constructor> DatabaseIO()
++ <getter> int getCurrentDBScore((Player player);
+
++ Player userInputOnID();
+- void createConnection();
+- void closeConnection();
+- void deleteAllDataFromDB();
++ void registerPlayerToDB();
++ void searchForPlayerFromDB();
++ void showAllPlayersFromDB();
++ void deleteFromDB();
++ void deletePlayerFromDB();
++ void showLeaderBoard();
++ void updateScorePoint(Player player);
++ void sortLeaderBoardDesc();
+}
+
+Class FileIO {
++ ArrayList<ArrayList<Enemy>> readWaveData()
+}
+
+Class Audio {
+- File soundEffect1
+- File soundEffect2
+- File soundEffect3
+
++ <constructor> Audio();
++ void playSoundEffect1()
++ void playSoundEffect2()
++ void playSoundEffect3()
++ void playSoundEffect4(Tower tower)
+}
+
+Interface Tower {
++ boolean ifOutOfAmmo();
++ void shootEnemy(Enemy e);
++ void setDmg(int damage);
++ int getDmg();
++ void reload();
++ int getCost();
++ ImageIcon getIcon();
++ File getAudio();
+}
+
+Abstract Class ATower implements Tower {
+# int damage
+# int cost
+- int maxAmmunition
+- int ammunition
+
++ <constructor> ATower()
++ boolean ifOutOfAmmo()
++ void towerPosition();
++ void shootEnemy(Enemy e)
++ void reload();
++ <setter> void setDmg(int damage);
++ <getter> void getDmg();
++ <getter> int getCost();
+}
+
+Class BasicTower extends ATower {
+- ImageIcon icon : path
+- File audio : path
+
++ <constructor> BasicTower();
++ String toString();
++ ImageIcon getIcon();
++ File getAudio();
+}
+
+Class RookieTower extends ATower {
+- ImageIcon icon : path
+- File audio : path
+
++ <constructor> RookieTower();
++ String toString();
++ ImageIcon getIcon();
++ File getAudio();
+}
+
+Class SuperTower extends ATower {
+- ImageIcon icon : path
+- File audio : path
+
++ <constructor> SuperTower();
++ String toString();
++ ImageIcon getIcon();
++ File getAudio();
+
+}
+
+Interface Enemy {
++ void enemyTakeDamage(int damageNumber);
++ int getEnemyHealth();
++ ImageIcon getIcon();
+}
+
+Abstract Class AEnemy implements Enemy {
+- int health
+
++ <constructor> AEnemy(int health);
++ void enemyTakeDamage();
++ int getEnemyHealth();
+}
+
+Class BasicEnemy extends AEnemy {
++ ImageIcon icon : path
++ <constructor> basicEnemy(int health);
++ <getter> ImageIcon getIcon();
+}
+
+Class EpicEnemy extends AEnemy {
++ ImageIcon icon : path
++ <constructor> epicEnemy(int health);
++ <getter> ImageIcon getIcon();
+}
+
+Class LegendaryEnemy extends AEnemy {
++ ImageIcon icon : path
++ <constructor> legendaryEnemy(int health);
++ <getter> ImageIcon getIcon();
+}
+
+@enduml
