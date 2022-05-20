@@ -21,7 +21,7 @@ public class BasicTower extends ATower {
         return "Basic Tower";
     }
 
-    // Method to
+    // Getter to return icon
     public ImageIcon getIcon() {
         return icon;
     }
