@@ -11,7 +11,7 @@ public class Audio {
     private File soundEffect1;
     private File soundEffect2;
     private File soundEffect3;
-
+    // CONSTRUCTOR
     public Audio() {
         this.soundEffect1 = new File("CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/src/res/zapsplat_multimedia_male_voice_processed_says_game_over_004_23671.wav");
         this.soundEffect2 = new File("CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/src/res/little_robot_sound_factory_Shoot_00.wav");
