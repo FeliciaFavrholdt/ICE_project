@@ -5,19 +5,23 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class DatabaseIO {
-    String input;
-    DatabasePassword databasePassword;
-    Scanner scan;
-    Connection connection;
-    String s;
-    String arrow = "\u2192";
-    Player tmpPlayer;
-    int id;
+
+    // OBJECTS OF CLASSES
+    private DatabasePassword databasePassword;
+    private Scanner scan;
+    private Connection connection;
+    private Player tmpPlayer;
+
+    // STRINGS
+    private String s;
+    private String arrow = "\u2192";
+
+    // PRIMITIVE DATA FIELDS
+    private int id;
 
     // CONSTRUCTOR
     public DatabaseIO() {
         this.scan = new Scanner(System.in);
-        //this.input = scan.nextLine();
     }
 
     // Method to create a connection to the SQL workbench
@@ -52,6 +56,7 @@ public class DatabaseIO {
             s = scan.nextLine();
             query.setString(1, s);
             query.executeUpdate();
+            System.out.println("You added player: " + s);
             query.close();
         } catch (SQLException e) {
             System.out.println(error);
@@ -66,14 +71,14 @@ public class DatabaseIO {
         String selectAllIfName = "SELECT * FROM PlayerData WHERE name like ?";
 
         try {
-            System.out.println("Search for a player:");
+            System.out.println("Search for all added players:");
             PreparedStatement query = connection.prepareStatement(selectAllIfName);
             s = "%" + scan.nextLine() + "%";
             query.setString(1, s);
             ResultSet rs = query.executeQuery();
 
             while (rs.next()) {
-                System.out.println("ID: " + rs.getString("id") + " Name: " + rs.getString("name"));
+                    System.out.println("ID: " + rs.getString("id") + " Name: " + rs.getString("name"));
             }
             query.close();
         } catch (SQLException e) {
@@ -82,8 +87,7 @@ public class DatabaseIO {
         closeConnection();
     }
 
-    // Method to choose a player id
-    // The method takes the input ( the id ) and connect it to the player name
+    // Method to choose a player id - takes the input ( the id ) and connects it to the player name
     public Player userInputOnID() {
         createConnection();
         String choosePlayer = "SELECT name from PlayerData WHERE id like ?";
@@ -129,7 +133,8 @@ public class DatabaseIO {
     public void deleteFromDB() {
         String choices = "\n" +
                 arrow + " Press P to delete a player\n" +
-                arrow + " Press D to delete all data";
+                arrow + " Press D to delete all data\n" +
+                arrow + " Press Q to return to the main menu";
 
         createConnection();
         System.out.println("\n>> Registered Players <<");
@@ -157,7 +162,7 @@ public class DatabaseIO {
             s = scan.nextLine();
             query.setString(1, s);
             query.executeUpdate();
-            System.out.println("You have deleted a player");
+            System.out.println("Succes! Player was deleted.");
             query.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -188,6 +193,8 @@ public class DatabaseIO {
             e.printStackTrace();
         }
     }
+
+    // Method to get the score from the SQL database
     public int getCurrentDBScore(Player player){
         int dbScore = 0;
         String currentScore = "SELECT scorepoints FROM PlayerData WHERE id = ?";
@@ -206,8 +213,7 @@ public class DatabaseIO {
         return dbScore;
     }
 
-    // Method to update scorepoints to a player(on ID)
-    // It updates if the new score is higher than the one saved
+    // Method to update scorepoints to a player(on ID) - updates if the new score is higher than the one saved
     public void updateScorePoint(Player player) {
         createConnection();
         String updateScorePoints = "UPDATE PlayerData SET scorepoints = ? WHERE id = ?";
@@ -237,13 +243,12 @@ public class DatabaseIO {
             PreparedStatement query = connection.prepareStatement(sortScoreDesc);
             ResultSet rs = query.executeQuery();
             while (rs.next()) {
-                System.out.println("Name: " + rs.getString("name") + "     " +
-                        "Scorepoints: " + rs.getInt("scorepoints"));
+                System.out.println("Player: " + rs.getString("name") + "     " +
+                        "Highest Score: " + rs.getInt("scorepoints"));
             }
             query.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
 }

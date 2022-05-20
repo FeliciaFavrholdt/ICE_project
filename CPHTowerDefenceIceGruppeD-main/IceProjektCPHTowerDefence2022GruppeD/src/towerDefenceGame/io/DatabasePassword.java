@@ -1,6 +1,8 @@
 package towerDefenceGame.io;
 
 public class DatabasePassword {
+
+    // STRINGS
     private final String JdbcUrl;
     private final String username;
     private final String password;
@@ -9,11 +11,14 @@ public class DatabasePassword {
     public DatabasePassword() {
         this.JdbcUrl = "jdbc:mysql://127.0.0.1:3306/Ice?" + "autoReconnect=true&useSSL=false";
         this.username = "root";
-        //this.password = "LangeBananer74";
+
+        // passwords to be used on local computers
+        this.password = "LangeBananer74";
         //this.password = "Lampen04aug";
-        this.password = "Mysql1238Code18";
+        //this.password = "Mysql1238Code18";
     }
 
+    // Method to return the sql url connection
     public String getJdbcUrl() {
         return this.JdbcUrl;
     }

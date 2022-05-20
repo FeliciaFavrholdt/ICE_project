@@ -1,11 +1,12 @@
 package towerDefenceGame.towers;
 
 import towerDefenceGame.enemies.Enemy;
-
 import javax.swing.*;
-import java.util.ArrayList;
+import java.io.File;
 
 public interface Tower {
+
+    //METHODS
     void towerPosition();
     boolean ifOutOfAmmo();
     void shootEnemy(Enemy e);
@@ -13,5 +14,8 @@ public interface Tower {
     int getDmg();
     void reload();
     int getCost();
+
+    //OBJECTS OF CLASSES
     ImageIcon getIcon();
+    File getAudio();
 }

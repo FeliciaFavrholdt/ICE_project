@@ -1,9 +1,13 @@
 package towerDefenceGame.towers;
 
 import javax.swing.*;
+import java.io.File;
 
 public class BasicTower extends ATower {
-    ImageIcon icon = new ImageIcon("CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/src/res/TowerJesper.png");
+
+    // OBJECTS OF CLASSES
+    private ImageIcon icon = new ImageIcon("CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/src/res/basicTower.png");
+    private File audio = new File("CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/src/res/aaj_0182_Sipping_Coffee_01.wav");
 
     // CONSTRUCTOR
     public BasicTower() {
@@ -16,10 +20,16 @@ public class BasicTower extends ATower {
     public String toString() {
         return "Basic Tower";
     }
+
+    // Method to
     public ImageIcon getIcon() {
         return icon;
     }
 
+    // Method to get sound effect
+    public File getAudio() {
+        return  audio;
+    }
 }
 
 

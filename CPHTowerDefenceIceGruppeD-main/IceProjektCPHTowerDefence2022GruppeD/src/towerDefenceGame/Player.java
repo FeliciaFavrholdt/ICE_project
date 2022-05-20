@@ -1,7 +1,11 @@
 package towerDefenceGame;
 
 public class Player {
+
+    // STRINGS
     private String name;
+
+    // PRIMITIVE DATA FIELDS
     private int score=0;
     private int coins;
     private int id;
@@ -38,6 +42,8 @@ public class Player {
         return id;
     }
 
+
+
     // SETTERS
     // Setter to set the score
     public void setScore(int score) {
@@ -48,5 +54,4 @@ public class Player {
     public void setCoins(int coins) {
         this.coins = coins;
     }
-
 }

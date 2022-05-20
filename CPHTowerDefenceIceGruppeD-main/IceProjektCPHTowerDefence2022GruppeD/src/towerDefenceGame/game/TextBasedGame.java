@@ -7,21 +7,30 @@ import towerDefenceGame.towers.Tower;
 import towerDefenceGame.towers.BasicTower;
 import towerDefenceGame.towers.RookieTower;
 import towerDefenceGame.towers.SuperTower;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TextBasedGame implements GameType {
-    Scanner scan = new Scanner(System.in);
-    ArrayList<Tower> towers;
-    ArrayList<ArrayList<Enemy>> waves;
-    FileIO fileIO = new FileIO();
-    private int currentWave = 0;
+
+    //SCANNER
+    private Scanner scan = new Scanner(System.in);
+
+    // OBJECTS OF CLASSES
+    private FileIO fileIO = new FileIO();
+    private Player player;
+
+    // PRIMITIVE DATA FIELDS
     private boolean hasLost = false;
+    private int currentWave = 0;
     private int startingCoins = 200;
     private int coinsPerWave = 100;
-    private Player player;
-    String arrow = "\u2192";
+
+    // STRINGS
+    public String arrow = "\u2192";
+
+    // ARRAYLISTS
+    ArrayList<Tower> towers;
+    ArrayList<ArrayList<Enemy>> waves;
 
     // CONSTRUCTOR
     public TextBasedGame(Player player) {
@@ -36,7 +45,7 @@ public class TextBasedGame implements GameType {
         System.out.println(player.getName() + " your score is: " + player.getScore());
     }
 
-    // Menu select method which shows a menu to buy towers, play a wave or end game
+    // Method which shows a menu to buy towers, play a wave or end game
     public void menuSelect() {
         System.out.println("\nCurrent amount of towers: " + towers.size());
         System.out.println("Current amount of coins: " + player.getCoins());
@@ -96,10 +105,10 @@ public class TextBasedGame implements GameType {
         }
     }
 
-    // Method to buy towers - shows how many money you have and what the towers costs
+    // Method to buy towers - shows how many coins you have and what the towers cost
     public void buyTower() {
         //strings
-        String text = "You do not have the coins to buy this tower\n";
+        String text = "You do not have enough coins to buy this tower!";
 
         System.out.println("""
                 Basic Tower = costs 100 coins, gives 100 damage
@@ -147,4 +156,3 @@ public class TextBasedGame implements GameType {
         }
     }
 }
-

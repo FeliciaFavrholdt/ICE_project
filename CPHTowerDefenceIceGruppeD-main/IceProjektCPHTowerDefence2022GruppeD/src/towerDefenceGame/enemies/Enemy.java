@@ -4,11 +4,10 @@ import javax.swing.*;
 
 public interface Enemy {
 
-    void moveEnemy(int x,int y);
-    void showEnemy();
-    void deathOfEnemy();
-    int checkIfEnemyIsInBase(int baseX, int baseY);
+    // METHODS
     void enemyTakeDamage(int damageNumber);
     int getEnemyHealth();
+
+    // OBJECTS OF CLASSES
     ImageIcon getIcon();
 }

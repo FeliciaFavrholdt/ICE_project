@@ -2,9 +2,9 @@ package towerDefenceGame.towers;
 
 import towerDefenceGame.enemies.Enemy;
 
-import java.util.ArrayList;
-
 public abstract class ATower implements Tower {
+
+    // PRIMITIVE DATA FIELDS
     protected int damage;
     protected int cost;
     private int maxAmmunition = 20;
@@ -14,7 +14,7 @@ public abstract class ATower implements Tower {
     public ATower() {
     }
 
-    //
+    // Method to
     @Override
     public void towerPosition() {
     }
@@ -55,8 +55,9 @@ public abstract class ATower implements Tower {
         System.out.println(this.toString() + " is reloading");
     }
 
-    // Method to get the cost of the tower
+    // Getter - the cost of the tower
     public int getCost() {
         return cost;
     }
+
 }

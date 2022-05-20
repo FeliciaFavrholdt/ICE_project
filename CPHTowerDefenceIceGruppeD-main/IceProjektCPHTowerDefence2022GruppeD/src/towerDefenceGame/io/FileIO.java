@@ -14,14 +14,11 @@ public class FileIO {
     // Method to read the wave data file which contains our different enemies
     public ArrayList<ArrayList<Enemy>> readWaveData() {
 
-        ArrayList<ArrayList<Enemy>> waves =new ArrayList<>();
-
-        // our waveData files on our seperate computers
-        // must be incommented or outcommented for it to work
+        // FILES
         File file = new File("CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/src/res/waveData.txt");
-        //File file = new File("/Users/fillefilejs_m1/Desktop/Github/ICE_project/CPHTowerDefenceIceGruppeD-main/IceProjektCPHTowerDefence2022GruppeD/resources/waveData.txt");
-        //File file = new File("C:\\Users\\Helen\\OneDrive\\Dokumenter\\GitHub\\ICE_project\\CPHTowerDefenceIceGruppeD-main\\IceProjektCPHTowerDefence2022GruppeD\\resources\\waveData.txt");
 
+        // ARRAYLISTS
+        ArrayList<ArrayList<Enemy>> waves = new ArrayList<>();
         ArrayList<String> waveData = new ArrayList<>();
 
         try {
@@ -34,12 +31,11 @@ public class FileIO {
         }
 
         String[] currentWaveData;
-        for(int i = 0; i < waveData.size(); i++)
-        {
+        for(int i = 0; i < waveData.size(); i++) {
             currentWaveData = waveData.get(i).split(",");
             ArrayList<Enemy> enemies = new ArrayList<>();
-            for(int j = 0; j  < currentWaveData.length; j++) {
-                switch (Integer.parseInt(currentWaveData[j])){
+            for(int j = 0; j < currentWaveData.length; j++) {
+                switch (Integer.parseInt(currentWaveData[j])) {
                     case 1:
                         Enemy basicEnemy = new BasicEnemy(100);
                         enemies.add(basicEnemy);
@@ -47,19 +43,14 @@ public class FileIO {
                     case 2:
                         Enemy epicEnemy = new EpicEnemy(200);
                         enemies.add(epicEnemy);
-
                         break;
                     case 3:
                         Enemy legendaryEnemy = new LegendaryEnemy(400);
                         enemies.add(legendaryEnemy);
-
                         break;
                     default:
                         Enemy defaultEnemy = new BasicEnemy(1000);
-                        System.out.println("an terrible monster has been unleashed");
                         enemies.add(defaultEnemy);
-
-
                 }
             }
             waves.add(enemies);
